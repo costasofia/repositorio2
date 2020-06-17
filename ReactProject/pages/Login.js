@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
 import { StyleSheet, View, Text, Image, Button, TextInput, TouchableOpacity, Alert, } from 'react-native';
-//import { style, styles } from './../stylesheet/style';
+
 import { StackAActions, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
 const Stack = createStackNavigator();
-//function Login({ navigation }) {
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -79,7 +79,7 @@ class Login extends Component {
     }
 
     GoToMapa = () => {
-        this.state.navigation.replace('DrawerRoute', this.state.id);
+        this.state.navigation.replace('Mapa', this.state.id);
 
     }
     GoToNotas = () => {
@@ -88,7 +88,9 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.full}>
-                <View style={styles.part1}></View>
+                <View style={styles.part1}>
+                    <Image style={{ width: 80, height: 80 }} source={require('../imagens/localizacao.png')} />
+                </View>
                 <View style={styles.part2}>
                     <TextInput
                         style={styles.textinput}
@@ -96,23 +98,23 @@ class Login extends Component {
                         onChangeText={(Email) => this.setState({ Email })}>
 
                     </TextInput>
-                
+
                     <TextInput
                         style={styles.textinput}
                         placeholder="Password"
                         onChangeText={(Password) => this.setState({ Password })}>
                     </TextInput>
-                
-                    <View style={styles.buttonview1}>
-                       <Button
-                       title='Login'
-                       onPress={()=> this.login(this.state.Email, this.state.Password)}
-                       />
+
+                    <View>
+                        <TouchableOpacity onPress={this.login(this.state.Email, this.state.Password)} activeOpacity={0.7} style={styles.button2} >
+                            <Text style={styles.textStyle}> LOGIN </Text>
+                        </TouchableOpacity>
+
                     </View>
                 </View>
                 <View style={styles.part3}>
                     <TouchableOpacity onPress={this.GoToNotas} activeOpacity={0.7} style={styles.button} >
-                        <Text style={styles.TextStyle}> Notas </Text>
+                        <Text style={styles.textStyle}> NOTAS </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -125,7 +127,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     part1: {
-        flex: 1,
+        flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -143,6 +145,7 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     buttonview1: {
+        color: 'black',
         flex: 1,
         margin: 10,
     },
@@ -163,6 +166,22 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         margin: 1
     },
+    button2: {
+      
+        height: 40,
+        padding: 10,
+        backgroundColor: '#ffbf00',
+        borderRadius: 2,
+        margin: 9
+    },
+    textStyle: {
+        margin: 1,
+        borderColor: 'black',
+        flex: 1,
+        color: 'black',
+        textAlign: 'center',
+    },
+
 
 });
 export default Login; 
