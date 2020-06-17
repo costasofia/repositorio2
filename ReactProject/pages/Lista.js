@@ -18,11 +18,13 @@ function Lista({ navigation }) {
       <Stack.Screen name="Listagem" component={Listagem}
         options={({ navigation }) => ({
           title: 'Lista de Notas',
+          backgroundColor: "#f1f1da",
         //  headerLeft: null,
           headerStyle: {
-            backgroundColor: '#2196F3',
+            backgroundColor: '#ffbf00',
           },
-          headerTintColor: '#fff',
+          headerTintColor: '#000',
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontWeight: 'bold',
           },
@@ -37,7 +39,7 @@ function Lista({ navigation }) {
             <TouchableOpacity
             //  style={styles.button}
               onPress={() => navigation.navigate('Login')}>
-              <Image style ={{width: 25, height:20,  marginLeft:10}} source={require('../imagens/saida.png')}/>   
+              <Image style ={{width: 25, height:20,  marginLeft:12}} source={require('../imagens/saida.png')}/>   
             </TouchableOpacity>
           ),
         })}
@@ -46,9 +48,10 @@ function Lista({ navigation }) {
         options={({ navigation }) => ({
           title: 'Detalhes da Nota',
           headerStyle: {
-            backgroundColor: '#2196F3',
+            backgroundColor: '#ffbf00',
           },
           headerTintColor: '#fff',
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontWeight: 'bold',
           },
@@ -59,9 +62,10 @@ function Lista({ navigation }) {
         options={({ navigation }) => ({
           title: 'Inserir Nova Nota ',
           headerStyle: {
-            backgroundColor: '#2196F3',
+            backgroundColor: '#ffbf00',
           },
           headerTintColor: '#fff',
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontWeight: 'bold',
           },
@@ -71,9 +75,10 @@ function Lista({ navigation }) {
         options={({ navigation }) => ({
           title: 'Atualizar Nota',
           headerStyle: {
-            backgroundColor: '#2196F3',
+            backgroundColor: '#ffbf00',
           },
           headerTintColor: '#fff',
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontWeight: 'bold',
           },
@@ -84,9 +89,10 @@ function Lista({ navigation }) {
         options={({ navigation }) => ({
           title: 'Eliminar Nota',
           headerStyle: {
-            backgroundColor: '#2196F3',
+            backgroundColor: '#ffbf00',
           },
           headerTintColor: '#fff',
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontWeight: 'bold',
           },

@@ -18,17 +18,6 @@ function Detalhes({ route, navigation }) {
           
          });
     }
-   /* function deleteData(){
-        Alert.alert(
-          'Informação',
-          'Remover Nota?',
-        [
-          {text: 'Não', onPress: () => console.log('Pedido cancelado'), style: 'cancel'},
-          {text: 'Sim', onPress: () => {deleteUser();}},
-        ]
-        );
-      }*/
-
       function deleteData(){
         navigation.navigate('Eliminar', {
           id: id,
@@ -37,16 +26,6 @@ function Detalhes({ route, navigation }) {
 
         });
       }
-    
-  /*    function deleteUser(){
-        realm = new Realm({ path: 'notas.realm' });
-        realm.write(() => {
-          let task = realm.objects('nota').filtered('id = ' + id);
-          realm.delete(task);
-        });
-        navigation.goBack();
-      }*/
-
       return (
         <View style={styles.MainContainer}>
           <View style={styles.MainContainer}>
@@ -67,6 +46,7 @@ function Detalhes({ route, navigation }) {
 
     const styles = StyleSheet.create({
         MainContainer: {
+            backgroundColor: "#ededde",
           flex: 1,
         },
   
@@ -76,7 +56,7 @@ function Detalhes({ route, navigation }) {
           marginTop: 20,
           padding: 10,
           margin: 10,
-          borderColor: '#2196F3',
+          borderColor: '#ffbf00',
           height: 40,
           borderRadius: 2,
           marginBottom: 10,
@@ -84,21 +64,20 @@ function Detalhes({ route, navigation }) {
         },
         button1: {
           alignItems: "center",
-          backgroundColor: "#2196F3",
-          padding: 5,
+          backgroundColor: "#ffbf00",
+          padding: 10,
           borderRadius: 4,
           margin: 10,
           height: 40
         },
         button2: {
           alignItems: "center",
-          backgroundColor: "#2196F3",
-          padding: 5,
+          backgroundColor: "#ffbf00",
+          padding: 10,
           borderRadius: 4,
           margin: 10,
           height: 40
         },
       });
-     
      
       export default Detalhes; 

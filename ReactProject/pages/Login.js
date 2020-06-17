@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
     full: {
         flex: 1,
         flexDirection: 'column',
+        backgroundColor: "#ededde",
     },
     part1: {
         flex: 2,

@@ -50,6 +50,7 @@ function Eliminar({ route, navigation }) {
     const styles = StyleSheet.create({
         MainContainer: {
           flex: 1,
+          backgroundColor: "#ededde",
         },
   
         TextInputStyle:
@@ -58,24 +59,17 @@ function Eliminar({ route, navigation }) {
           marginTop: 20,
           padding: 10,
           margin: 10,
-          borderColor: '#2196F3',
+          borderColor: '#ffbf00',
           height: 40,
           borderRadius: 2,
           marginBottom: 10,
           textAlign: 'center',
         },
-        button1: {
-          alignItems: "center",
-          backgroundColor: "#2196F3",
-          padding: 5,
-          borderRadius: 4,
-          margin: 10,
-          height: 40
-        },
+
         button2: {
           alignItems: "center",
-          backgroundColor: "#2196F3",
-          padding: 5,
+          backgroundColor: "#ffbf00",
+          padding: 10,
           borderRadius: 4,
           margin: 10,
           height: 40

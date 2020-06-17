@@ -64,7 +64,9 @@ function Listagem({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+
     MainContainer :{
+        backgroundColor: "#ededde",
        flex:1,
        justifyContent: 'center',
        paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
       },
    
      linha: {
-       backgroundColor: '#2196F3',
+       backgroundColor: '#ffbf00',
        margin: 2,
        flex: 1,
        padding: 5,

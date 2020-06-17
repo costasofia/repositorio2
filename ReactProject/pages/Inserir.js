@@ -56,11 +56,12 @@ function Inserir({ navigation }) {
 const styles = StyleSheet.create({
     MainContainer: {
         flex:1, 
+        backgroundColor: "#ededde",
     }, 
     TextStyle:{
         borderWidth: 1, 
         margin: 10, 
-        borderColor: "#2196F3",
+        borderColor: "#ffbf00",
         backgroundColor: "#fff",
         height: 40,
         borderRadius: 2,
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     },
     button: {
         alignItems: "center",
-        backgroundColor: "#2196F3",
+        backgroundColor: "#ffbf00",
         padding: 10,
         borderRadius: 2,
         margin: 10,
