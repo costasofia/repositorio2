@@ -11,7 +11,7 @@ let realm;
 function Inserir({ navigation }) {
     const [assunto, setAssunto] = useState('');
     const [descricao, setDescricao] = useState('');
-
+    
     const { translations } = useContext(LocalizationContext);
 
     function insert() {

@@ -17,6 +17,7 @@ function Login({ navigation }) {
     const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('');
 
+
     const { translations } = useContext(LocalizationContext);
 
     const [dimensions, setDimensions] = useState({ window, screen });
@@ -69,7 +70,7 @@ function Login({ navigation }) {
                             translations.Login,
                             translations.Loginok,
                             [
-                                { text: translations.Continuar, onPress: () => { GoToMapa(); } },
+                                { text: translations.Continuar, onPress: () => { navigation.navigate('Mapa', {parametro: decoded.IdUtilizador}) } },
                             ]
 
                         )
@@ -88,9 +89,7 @@ function Login({ navigation }) {
                 });
         }
     }
-    function GoToMapa() {
-        navigation.navigate('Lista');
-    }
+   
     return (
         <View style={dimensions.window.height > dimensions.window.width ? styles.fullP : styles.fullL}>
             <View style={styles.part1}>

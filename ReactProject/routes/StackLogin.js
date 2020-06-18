@@ -11,7 +11,7 @@ import Inserir from './../pages/Inserir';
 import Detalhes from './../pages/Detalhes';
 import Atualizar from './../pages/Atualizar';
 import Eliminar from './../pages/Eliminar';
-
+import Mapa from './../pages/Mapa';
 const Stack = createStackNavigator();
 
 function StackLogin({ navigation }) {
@@ -24,13 +24,15 @@ function StackLogin({ navigation }) {
                     options={{ headerShown: false, }} />
                 <Stack.Screen name="Listagem" component={Listagem}
                     options={{ headerShown: false, }} />
-                     <Stack.Screen name="Inserir" component={Inserir}
+                <Stack.Screen name="Inserir" component={Inserir}
                     options={{ headerShown: false, }} />
-                    <Stack.Screen name="Detalhes" component={Detalhes}
+                <Stack.Screen name="Detalhes" component={Detalhes}
                     options={{ headerShown: false, }} />
-                      <Stack.Screen name="Atualizar" component={Atualizar}
+                <Stack.Screen name="Atualizar" component={Atualizar}
                     options={{ headerShown: false, }} />
-                     <Stack.Screen name="Eliminar" component={Eliminar}
+                <Stack.Screen name="Eliminar" component={Eliminar}
+                    options={{ headerShown: false, }} />
+                <Stack.Screen name="Mapa" component={Mapa}
                     options={{ headerShown: false, }} />
             </Stack.Navigator>
         </NavigationContainer>
