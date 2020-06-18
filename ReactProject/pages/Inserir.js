@@ -1,8 +1,9 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useState, useEffect, useContext } from 'react';
 import { StyleSheet, Platform, View, Button, Image, Text, TextInput, TouchableOpacity, Alert, YellowBox, ListView } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { LocalizationContext } from './../services/localization/LocalizationContext';
 
 import Realm from 'realm';
 let realm;
@@ -10,6 +11,8 @@ let realm;
 function Inserir({ navigation }) {
     const [assunto, setAssunto] = useState('');
     const [descricao, setDescricao] = useState('');
+
+    const { translations } = useContext(LocalizationContext);
 
     function insert() {
         if (assunto && descricao) {
@@ -34,19 +37,19 @@ function Inserir({ navigation }) {
 
         <View style={styles.MainContainer}>
             <TextInput
-                placeholder="Inserir Assunto"
+                placeholder={translations.InserirA}
                 style={styles.TextStyle}
                 underlineColorAndroid="transparent"
                 onChangeText={text => setAssunto(text)}
             />
             <TextInput
-                placeholder="Inserir Descricao"
+                placeholder={translations.InserirD}
                 style={styles.TextStyle}
                 underlineColorAndroid="transparent"
                 onChangeText={text => setDescricao(text)}
             />
             <TouchableOpacity onPress={insert} style={styles.button}>
-                <Text> Inserir Nova Nota</Text>
+                <Text>{translations.InserirNota}</Text>
             </TouchableOpacity>
         </View>
     

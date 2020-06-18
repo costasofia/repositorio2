@@ -52,7 +52,7 @@ function Listagem({ navigation }) {
                     <TouchableWithoutFeedback onPress={() => actionOnRow(item, navigation)}>
                         <View style={styles.linha}>
                             <View style={{ flex: 1, flexDirection: 'column' }}>
-                                <Text style={styles.textprim}>Assunto: {item.assunto}</Text>
+                                <Text style={styles.textprim}>{item.assunto}</Text>
                                 <Text style={styles.textsec}>{item.descricao}</Text>
                             </View>
                         </View>

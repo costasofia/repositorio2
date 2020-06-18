@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { LocalizationContext } from './../services/localization/LocalizationContext';
 import Listagem from './Listagem';
 import Inserir from './Inserir';
 import Atualizar from './Atualizar';
@@ -13,11 +13,12 @@ const Stack = createStackNavigator();
 
 function Lista({ navigation }) {
 
+  const { translations } = useContext(LocalizationContext);
   return (
     <Stack.Navigator initialRouteName="Listagem">
       <Stack.Screen name="Listagem" component={Listagem}
         options={({ navigation }) => ({
-          title: 'Lista de Notas',
+          title:translations.ListaN,
           backgroundColor: "#f1f1da",
         //  headerLeft: null,
           headerStyle: {
@@ -46,7 +47,7 @@ function Lista({ navigation }) {
       />
       <Stack.Screen name="Detalhes" component={Detalhes}
         options={({ navigation }) => ({
-          title: 'Detalhes da Nota',
+          title:translations.DetalhesN,
           headerStyle: {
             backgroundColor: '#ffbf00',
           },
@@ -60,7 +61,7 @@ function Lista({ navigation }) {
       />
       <Stack.Screen name="Inserir" component={Inserir}
         options={({ navigation }) => ({
-          title: 'Inserir Nova Nota ',
+          title:translations.InserirNota,
           headerStyle: {
             backgroundColor: '#ffbf00',
           },
@@ -73,7 +74,7 @@ function Lista({ navigation }) {
       />
       <Stack.Screen name="Atualizar" component={Atualizar}
         options={({ navigation }) => ({
-          title: 'Atualizar Nota',
+          title:translations.AtualizarN,
           headerStyle: {
             backgroundColor: '#ffbf00',
           },
@@ -87,7 +88,7 @@ function Lista({ navigation }) {
       />
        <Stack.Screen name="Eliminar" component={Eliminar}
         options={({ navigation }) => ({
-          title: 'Eliminar Nota',
+          title:translations.EliminarN,
           headerStyle: {
             backgroundColor: '#ffbf00',
           },
@@ -104,12 +105,4 @@ function Lista({ navigation }) {
 
   );
 }
-
-/*const styles = StyleSheet.create({
-  button: {
-    alignItems: "center",
-    padding: 10,
-    marginRight: 10,
-  },
-});*/
 export default Lista;

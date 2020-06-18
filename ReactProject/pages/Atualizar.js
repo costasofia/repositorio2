@@ -1,10 +1,10 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useState, useEffect, useContext} from 'react';
 import { StyleSheet, Platform, View, Button, Image, Text, TextInput, TouchableOpacity, Alert, YellowBox, ListView } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StackActions } from '@react-navigation/native';
-
+import { LocalizationContext } from './../services/localization/LocalizationContext';
 import Realm from 'realm';
 let realm;
 
@@ -13,7 +13,7 @@ function Atualizar({ route, navigation }) {
 
     const [assunto1, setAssunto1] = useState(assunto);
     const [descricao1, setDescricao1] = useState(descricao);
-
+    const { translations } = useContext(LocalizationContext);
     function atualizar() {
         if (assunto1 && descricao1) {
             realm = new Realm({ path: 'notas.realm' });
@@ -26,11 +26,11 @@ function Atualizar({ route, navigation }) {
                     obj[0].assunto = assunto1
                     obj[0].descricao = descricao1
                     Alert.alert(
-                        'Info',
-                        'O registo foi atualizado com sucesso',
+                        translations.Info,
+                        translations.Registo,
                         [
                             {
-                                text: 'Ok',
+                                text:translations.ok,
                                 onPress: () =>
                                     navigation.dispatch(StackActions.popToTop())
                             },
@@ -38,7 +38,7 @@ function Atualizar({ route, navigation }) {
                         { cancelable: false }
                     );
                 } else {
-                    alert('Atualização falhou');
+                    alert(translations.Falha);
                 }
             });
         }
@@ -47,19 +47,19 @@ function Atualizar({ route, navigation }) {
     return (
         <View style={styles.MainContainer}>
             <TextInput
-                placeholder="Inserir Assunto"
+                placeholder={translations.InserirA}
                 style={styles.TextStyle}
                 underlineColorAndroid="transparent"
                 onChangeText={text => setAssunto1(text)}
             >{assunto1}</TextInput>
             <TextInput
-                placeholder="Inserir Descrição"
+                placeholder={translations.InserirD}
                 style={styles.TextStyle}
                 underlineColorAndroid="transparent"
                 onChangeText={text => setDescricao1(text)}
             >{descricao1}</TextInput>
             <TouchableOpacity onPress={atualizar} style={styles.button} >
-                <Text> Atualizar Nota </Text>
+                <Text>{translations.AtualizarN}</Text>
             </TouchableOpacity>
         </View>
     );

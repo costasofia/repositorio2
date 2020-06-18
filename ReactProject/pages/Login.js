@@ -1,46 +1,44 @@
-import React, { Component } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
 import { StyleSheet, View, Text, Image, Button, TextInput, TouchableOpacity, Alert, } from 'react-native';
 
 import { StackAActions, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { LocalizationContext } from './../services/localization/LocalizationContext';
 const Stack = createStackNavigator();
-class Login extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            navigation: props.navigation,
-            id: '',
-            Email: '',
-            Password: '',
-        }
 
-    } login = (Email, Password) => {
+function Login({ navigation }) {
+
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
+
+    const { translations } = useContext(LocalizationContext);
+    function login() {
+
         if (Email == '' && Password == '') {
             Alert.alert(
-                'Login',
-                'Insira um email e uma password',
+                translations.Login,
+                translations.EP,
                 [
-                    { text: 'Fechar', style: 'cancel' },
+                    { text:translations.Inserir, style: 'cancel' },
                 ]
             )
         } else if (Email == '' && Password != '') {
             Alert.alert(
-                'Login',
-                'Insira um email',
+                translations.Login,
+                translations.E,
                 [
-                    { text: 'Fechar', style: 'cancel' },
+                    { text:translations.Inserir, style: 'cancel' },
                 ]
             )
         } else if (Email != '' && Password == '') {
             Alert.alert(
-                'Login',
-                'Insira uma password',
+                translations.Login,
+                translations.P,
                 [
-                    { text: 'Fechar', style: 'cancel' },
+                    { text:translations.Inserir, style: 'cancel' },
                 ]
             )
         } else {
@@ -51,23 +49,21 @@ class Login extends Component {
                 .then(function (response) {
                     var token = response.data;
                     var decoded = jwt_decode(token);
-
-                    this.state.id = decoded.IdUtilizador;
                     if (Email == decoded.Email) {
                         Alert.alert(
-                            'Login',
-                            'Login Efetuado',
+                            translations.Login,
+                            translations.Loginok,
                             [
-                                { text: 'Fechar', onPress: () => this.GoToMapa() },
+                                { text:translations.Continuar, onPress: () => { GoToMapa(); } },
                             ]
 
                         )
                     } else {
                         Alert.alert(
-                            'Login',
-                            'Login falhou',
+                            translations.Login,
+                            translations.LoginF,
                             [
-                                { text: 'Fechar', style: 'cancel' },
+                                { text:translations.Fechar, style: 'cancel' },
                             ]
                         )
                     }
@@ -78,49 +74,44 @@ class Login extends Component {
         }
     }
 
-    GoToMapa = () => {
-        this.state.navigation.replace('Mapa', this.state.id);
-
+    function GoToMapa() {
+        navigation.navigate('Lista');
     }
-    GoToNotas = () => {
-        this.props.navigation.navigate('Lista');
-    }
-    render() {
-        return (
-            <View style={styles.full}>
-                <View style={styles.part1}>
-                    <Image style={{ width: 80, height: 80 }} source={require('../imagens/localizacao.png')} />
-                </View>
-                <View style={styles.part2}>
-                    <TextInput
-                        style={styles.textinput}
-                        placeholder="Email"
-                        onChangeText={(Email) => this.setState({ Email })}>
 
-                    </TextInput>
+    return (
 
-                    <TextInput
-                        style={styles.textinput}
-                        placeholder="Password"
-                        onChangeText={(Password) => this.setState({ Password })}>
-                    </TextInput>
+        <View style={styles.full}>
+            <View style={styles.part1}>
+                <Image style={{ width: 80, height: 80 }} source={require('../imagens/localizacao.png')} />
+            </View>
+            <View style={styles.part2}>
+                <TextInput
+                    style={styles.textinput}
+                    placeholder={translations.Email}
+                    onChangeText={text => setEmail(text)}>
 
-                    <View>
-                        <TouchableOpacity onPress={this.login(this.state.Email, this.state.Password)} activeOpacity={0.7} style={styles.button2} >
-                            <Text style={styles.textStyle}> LOGIN </Text>
-                        </TouchableOpacity>
+                </TextInput>
 
-                    </View>
-                </View>
-                <View style={styles.part3}>
-                    <TouchableOpacity onPress={this.GoToNotas} activeOpacity={0.7} style={styles.button} >
-                        <Text style={styles.textStyle}> NOTAS </Text>
+                <TextInput
+                    style={styles.textinput}
+                    placeholder={translations.Password}
+                    onChangeText={text => setPassword(text)}>
+                </TextInput>
+                <View>
+                    <TouchableOpacity onPress={login} style={styles.button2}>
+                        <Text style={styles.textStyle}>{translations.BotaoLogin}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
-        );
-    }
+            <View style={styles.part3}>
+                <TouchableOpacity onPress={() => navigation.navigate('Lista')} style={styles.button}>
+                <Text style={styles.textStyle}>{translations.BotaoNotas}</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+    );
 }
+
 const styles = StyleSheet.create({
     full: {
         flex: 1,
@@ -168,12 +159,11 @@ const styles = StyleSheet.create({
         margin: 1
     },
     button2: {
-      
         height: 40,
         padding: 10,
         backgroundColor: '#ffbf00',
         borderRadius: 2,
-        margin: 9
+        margin:9 
     },
     textStyle: {
         margin: 1,
@@ -185,4 +175,5 @@ const styles = StyleSheet.create({
 
 
 });
+
 export default Login; 

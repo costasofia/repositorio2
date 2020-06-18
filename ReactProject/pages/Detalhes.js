@@ -1,15 +1,19 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Platform, View, Button, Image, Text, TextInput, TouchableOpacity, Alert, YellowBox, ListView } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import {LocalizationContext} from './../services/localization/LocalizationContext';
+
 import Realm from 'realm';
 let realm ;
 
 function Detalhes({ route, navigation }) {
+
+
     const { id, assunto, descricao} = route.params;
-  
+    const { translations } = useContext(LocalizationContext);
     function updateData(){
       navigation.navigate('Atualizar', {
            id: id,
@@ -26,18 +30,19 @@ function Detalhes({ route, navigation }) {
 
         });
       }
+
       return (
         <View style={styles.MainContainer}>
           <View style={styles.MainContainer}>
-              <Text style = { styles.TextInputStyle }>Assunto: {assunto}</Text>
-              <Text style = { styles.TextInputStyle }>Descrição: {descricao}</Text>
+              <Text style = { styles.TextInputStyle }>{assunto}</Text>
+              <Text style = { styles.TextInputStyle }>{descricao}</Text>
           </View>
          
               <TouchableOpacity onPress={updateData} style={styles.button1} >
-                 <Text> Atualizar Nota</Text>
+                 <Text>{translations.AtualizarN}</Text>
                </TouchableOpacity>
                <TouchableOpacity onPress={deleteData} style={styles.button2} >
-                  <Text> Eliminar Nota</Text>
+                  <Text>{translations.EliminarN}</Text>
               </TouchableOpacity>
           
         </View>

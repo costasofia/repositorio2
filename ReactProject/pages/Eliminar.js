@@ -1,24 +1,24 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useState, useEffect, useContext } from 'react';
 import { StyleSheet, Platform, View, Button, Image, Text, TextInput, TouchableOpacity, Alert, YellowBox, ListView } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { LocalizationContext } from './../services/localization/LocalizationContext';
 import Realm from 'realm';
 let realm ;
 
 function Eliminar({ route, navigation }) {
     const { id, assunto, descricao} = route.params;
-  
+    const { translations } = useContext(LocalizationContext);
   
     function deleteData(){
         Alert.alert(
-          'Informação',
-          'Remover Nota?',
+          translations.Info,
+          translations.MsgRemover,
         [
-          {text: 'Não', 
+          {text:translations.Nao, 
           onPress: () => console.log('Pedido cancelado'), style: 'cancel'},
-          {text: 'Sim', 
+          {text:translations.Sim, 
           onPress: () => {deleteUser();}},
         ]
         );
@@ -36,11 +36,11 @@ function Eliminar({ route, navigation }) {
       return (
         <View style={styles.MainContainer}>
           <View style={styles.MainContainer}>
-              <Text style = { styles.TextInputStyle }>Assunto: {assunto}</Text>
-              <Text style = { styles.TextInputStyle }>Descrição: {descricao}</Text>
+              <Text style = { styles.TextInputStyle }>{translations.Assunto}{assunto}</Text>
+              <Text style = { styles.TextInputStyle }>{translations.Descricao}{descricao}</Text>
           </View>
                <TouchableOpacity onPress={deleteData} style={styles.button2} >
-                  <Text> Eliminar Nota</Text>
+                  <Text>{translations.EliminarN}</Text>
               </TouchableOpacity>
           
         </View>

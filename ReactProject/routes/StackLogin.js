@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import LocalizationContext from './../services/localization/LocalizationContext';
+
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Login from './../pages/Login';
