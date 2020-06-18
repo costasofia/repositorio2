@@ -1,13 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
-import { StyleSheet, View, Text, Image, Button, TextInput, TouchableOpacity, Alert, } from 'react-native';
+import { StyleSheet, View, Text, Image, Button, TextInput, TouchableOpacity, Alert, Dimensions, } from 'react-native';
 
 import { StackAActions, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { LocalizationContext } from './../services/localization/LocalizationContext';
-const Stack = createStackNavigator();
 
+
+const Stack = createStackNavigator();
+const window = Dimensions.get('window');
+const screen = Dimensions.get('screen');
 
 function Login({ navigation }) {
 
@@ -15,6 +18,18 @@ function Login({ navigation }) {
     const [Password, setPassword] = useState('');
 
     const { translations } = useContext(LocalizationContext);
+
+    const [dimensions, setDimensions] = useState({ window, screen });
+    const onChange = ({ window, screen }) => {
+        setDimensions({ window, screen });
+    }
+    useEffect(() => {
+        Dimensions.addEventListener("change", onChange);
+        return () => {
+            Dimensions.removeEventListener("change", onChange);
+        };
+    });
+
     function login() {
 
         if (Email == '' && Password == '') {
@@ -22,7 +37,7 @@ function Login({ navigation }) {
                 translations.Login,
                 translations.EP,
                 [
-                    { text:translations.Inserir, style: 'cancel' },
+                    { text: translations.Inserir, style: 'cancel' },
                 ]
             )
         } else if (Email == '' && Password != '') {
@@ -30,7 +45,7 @@ function Login({ navigation }) {
                 translations.Login,
                 translations.E,
                 [
-                    { text:translations.Inserir, style: 'cancel' },
+                    { text: translations.Inserir, style: 'cancel' },
                 ]
             )
         } else if (Email != '' && Password == '') {
@@ -38,7 +53,7 @@ function Login({ navigation }) {
                 translations.Login,
                 translations.P,
                 [
-                    { text:translations.Inserir, style: 'cancel' },
+                    { text: translations.Inserir, style: 'cancel' },
                 ]
             )
         } else {
@@ -54,7 +69,7 @@ function Login({ navigation }) {
                             translations.Login,
                             translations.Loginok,
                             [
-                                { text:translations.Continuar, onPress: () => { GoToMapa(); } },
+                                { text: translations.Continuar, onPress: () => { GoToMapa(); } },
                             ]
 
                         )
@@ -63,7 +78,7 @@ function Login({ navigation }) {
                             translations.Login,
                             translations.LoginF,
                             [
-                                { text:translations.Fechar, style: 'cancel' },
+                                { text: translations.Fechar, style: 'cancel' },
                             ]
                         )
                     }
@@ -73,25 +88,20 @@ function Login({ navigation }) {
                 });
         }
     }
-
     function GoToMapa() {
         navigation.navigate('Lista');
     }
-
     return (
-
-        <View style={styles.full}>
+        <View style={dimensions.window.height > dimensions.window.width ? styles.fullP : styles.fullL}>
             <View style={styles.part1}>
-                <Image style={{ width: 80, height: 80 }} source={require('../imagens/localizacao.png')} />
+                <Image style={{ width: 150, height: 150 }} source={require('../imagens/localizacao.png')} />
             </View>
             <View style={styles.part2}>
                 <TextInput
                     style={styles.textinput}
                     placeholder={translations.Email}
                     onChangeText={text => setEmail(text)}>
-
                 </TextInput>
-
                 <TextInput
                     style={styles.textinput}
                     placeholder={translations.Password}
@@ -102,33 +112,38 @@ function Login({ navigation }) {
                         <Text style={styles.textStyle}>{translations.BotaoLogin}</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
-            <View style={styles.part3}>
                 <TouchableOpacity onPress={() => navigation.navigate('Lista')} style={styles.button}>
-                <Text style={styles.textStyle}>{translations.BotaoNotas}</Text>
+                    <Text style={styles.textStyle}>{translations.BotaoNotas}</Text>
                 </TouchableOpacity>
             </View>
         </View>
+
     );
 }
 
 const styles = StyleSheet.create({
-    full: {
+    fullP: {
         flex: 1,
         flexDirection: 'column',
         backgroundColor: "#ededde",
     },
+    fullL: {
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: "#ededde",
+    },
     part1: {
-        flex: 2,
+        flex: 12,
         justifyContent: 'center',
         alignItems: 'center',
     },
     part2: {
-        flex: 2,
+        flex: 12,
+        justifyContent: 'center',
     },
     part3: {
         flex: 1,
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         margin: 10,
     },
     buttonview: {
@@ -156,14 +171,14 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#ffbf00',
         borderRadius: 2,
-        margin: 1
+        margin: 10
     },
     button2: {
         height: 40,
         padding: 10,
         backgroundColor: '#ffbf00',
         borderRadius: 2,
-        margin:9 
+        margin: 9
     },
     textStyle: {
         margin: 1,
@@ -172,8 +187,6 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'center',
     },
-
-
 });
 
 export default Login; 
