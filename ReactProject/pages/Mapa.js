@@ -1,33 +1,37 @@
-import React, { useEffect, useState, Component } from 'react';
-import { View, Text, Button, StyleSheet, Image, Alert, TouchableOpacity, actionButtuon, } from 'react-native';
+import React, { useEffect, useState, componentDidMount } from 'react';
+import { View, Map, Text, Button, StyleSheet, Image, Alert, TouchableOpacity, actionButtuon, } from 'react-native';
 import { StackAActions, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker, Callout, Circle } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import axios from "axios";
 
 let images = 'http://192.168.1.67:5000/'
+
 function Mapa({ route, navigation }) {
 
     const parametro = route.params.parametro;
-    const [error, setError] = useState();
-    const [markers, setMarkers] = useState([]);
+    const [ponto, setPonto] = useState([]);
 
-    const getPontos = () => {
-        return axios.get('http://192.168.1.67:5000/ponto/getPontosById')
+    const [error, setError] = useState();
+
+    function getPontos() {
+        return axios.get('http://192.168.1.67:5000/ponto/getPontos')
             .then(function (response) {
-                setMarkers({ markers: response.data })
+                setPonto( response.data)
+                ponto.map(ponto => {
+                    console.log(ponto);
+                })
             }.bind(this))
             .catch((error) => {
                 console.log(error);
-            });
+            },[]);
     }
 
-    function componentDidMount() {
-        this.getPontos()
-        console.log('Map: ' + this.state.id);
-    }
+    useEffect(() => {
+        getPontos();
 
+    },[]);
     const [initialPosition, setInitialPosition] = useState(
         {
             latitude: 41.693447,
@@ -78,34 +82,32 @@ function Mapa({ route, navigation }) {
             <MapView
                 provider={PROVIDER_GOOGLE} // remove if not using Google Maps
                 style={styles.map}
-                region={initialPosition}>
-
-                {
-                    markers.map(marker =>
-                        <Marker
-                            key={marker.IdPonto}
-                            coordinate={{
-                                latitude: marker.latitude,
-                                longitude: marker.longitude
-                            }}>
-                            <Callout>
-                                <View style={styles.callout}>
-                                    <Image style={styles.image}
-                                        source={{ uri: images + marker.Imagem }} />
-                                    <View style={styles.callout2}>
-                                        <Text>
-                                            Assunto: {marker.Tema}
-                                        </Text>
-                                    </View>
+                region={initialPosition}
+            >
+                {ponto && ponto.map(marker => 
+                    <Marker
+                        key={marker.IdPonto}
+                        coordinate={{
+                            latitude: marker.Latitude,
+                            longitude: marker.Longitude
+                        }}>
+                        <Callout>
+                            <View style={styles.callout}>
+                                <Image style={styles.image}
+                                    source={{ uri: images + marker.Imagem }} />
+                                <View style={styles.callout2}>
+                                    <Text>
+                                        Assunto:{marker.Tema}
+                                    </Text>
                                 </View>
-                            </Callout>
+                            </View>
+                        </Callout>
 
-                        </Marker>
-                    )
+                    </Marker>
+                )
                 }
                 <Marker
-                    coordinate={markerPosition}
-                >
+                    coordinate={markerPosition}>
                 </Marker>
 
 
