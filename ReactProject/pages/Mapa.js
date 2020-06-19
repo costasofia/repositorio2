@@ -114,7 +114,8 @@ function Mapa({ route, navigation }) {
                 }
                 <Marker
                     onPress={() => navigation.navigate('InserirP', {
-                        parametro
+                        parametro,
+                        parametro2: markerPosition
                     })}
                     coordinate={markerPosition}>
                 </Marker>
