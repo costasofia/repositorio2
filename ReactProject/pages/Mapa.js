@@ -2,6 +2,8 @@ import React, { useEffect, useState, componentDidMount } from 'react';
 import { View, Map, Text, Button, StyleSheet, Image, Alert, TouchableOpacity, actionButtuon, } from 'react-native';
 import { StackAActions, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout, Circle } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import axios from "axios";
@@ -79,6 +81,8 @@ function Mapa({ route, navigation }) {
             </Text>
         </View>*/
         <View style={styles.container}>
+
+    
             <MapView
                 showsUserLocation
                 zoomControlEnabled
@@ -119,9 +123,18 @@ function Mapa({ route, navigation }) {
                     })}
                     coordinate={markerPosition}>
                 </Marker>
-
-
             </MapView>
+                {/* Rest of the app comes ABOVE the action button component !*/}
+                <ActionButton buttonColor="rgba(231,76,60,1)" position='center'>
+                    <ActionButton.Item buttonColor='#9b59b6' title="Close" onPress={() => navigation.navigate('Login')}>
+                        <Icon name="md-close" style={styles.actionButtonIcon} />
+                    </ActionButton.Item>
+                    <ActionButton.Item buttonColor='#3498db' title="List" onPress={() => navigation.navigate('ListaP', { parametro})}>
+                        <Icon name="md-list" style={styles.actionButtonIcon} />
+                    </ActionButton.Item>
+                   
+                </ActionButton>
+            
         </View>
 
     );
@@ -153,72 +166,14 @@ const styles = StyleSheet.create({
         flex: 0.095,
 
     },
-    btnListaDireita: {
-        position: 'absolute',
-        width: 50,
-        height: 40,
-        alignItems: 'center',
-        justifyContent: 'center',
-        right: 30,
-        bottom: 20,
+    actionButtonIcon: {
+        fontSize: 16,
+        height: 16,
+        color: 'white',
     },
-
-    FloatingButtonStyle: {
-        //resizeMode: 'contain',
-        //width: 40,
-        // height: 40,
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        backgroundColor: '#ee6e73',
-        position: 'absolute',
-        bottom: 10,
-        right: 10,
-    },
-    userProblems: {
-        alignItems: 'flex-end',
-        marginRight: 10,
-        bottom: "37%"
-    },
-    text: {
-        color: 'black',
-        fontSize: 20,
-        marginTop: 13,
-        marginLeft: 12,
-    },
-    imageButton: {
-        width: 20,
-        height: 20,
-    },
-    MainContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5F5F5',
-    },
-
-    TouchableOpacityStyle: {
-        position: 'absolute',
-        width: 50,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        right: 30,
-        bottom: 30,
-    },
-
-    FloatingButtonStyle: {
-        resizeMode: 'contain',
-        width: 50,
-        height: 50,
-        //backgroundColor:'black'
-    },
-    MainContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5F5F5',
-    },
+    botao: {
+        paddingLeft: 7,
+    }
 
 });
 export default Mapa;

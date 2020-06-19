@@ -13,6 +13,7 @@ import Atualizar from './../pages/Atualizar';
 import Eliminar from './../pages/Eliminar';
 import Mapa from './../pages/Mapa';
 import InserirP from './../pages/InserirP';
+import ListaP from './../pages/ListaP';
 const Stack = createStackNavigator();
 
 function StackLogin({ navigation }) {
@@ -35,7 +36,9 @@ function StackLogin({ navigation }) {
                     options={{ headerShown: false, }} />
                 <Stack.Screen name="Mapa" component={Mapa}
                     options={{ headerShown: false, }} />
-                      <Stack.Screen name="InserirP" component={InserirP}
+                <Stack.Screen name="InserirP" component={InserirP}
+                    options={{ headerShown: false, }} />
+                <Stack.Screen name="ListaP" component={ListaP}
                     options={{ headerShown: false, }} />
             </Stack.Navigator>
         </NavigationContainer>

@@ -102,6 +102,7 @@ function Login({ navigation }) {
                     onChangeText={text => setEmail(text)}>
                 </TextInput>
                 <TextInput
+                    secureTextEntry={true}
                     style={styles.textinput}
                     placeholder={translations.Password}
                     onChangeText={text => setPassword(text)}>

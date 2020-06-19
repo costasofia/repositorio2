@@ -3,12 +3,11 @@ import { View, Text, Button, TextInput } from 'react-native';
 
 function InserirP({route, navigation}){
     const parametro = route.params.parametro;
-   // const parametro2 = route.params.parametro2;
     const {longitude} = route.params.parametro2;
     const {latitude} = route.params.parametro2;
 
 
-    
+
     return(
        <View>
             <Text>
