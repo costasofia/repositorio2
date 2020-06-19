@@ -12,6 +12,7 @@ import Detalhes from './../pages/Detalhes';
 import Atualizar from './../pages/Atualizar';
 import Eliminar from './../pages/Eliminar';
 import Mapa from './../pages/Mapa';
+import InserirP from './../pages/InserirP';
 const Stack = createStackNavigator();
 
 function StackLogin({ navigation }) {
@@ -33,6 +34,8 @@ function StackLogin({ navigation }) {
                 <Stack.Screen name="Eliminar" component={Eliminar}
                     options={{ headerShown: false, }} />
                 <Stack.Screen name="Mapa" component={Mapa}
+                    options={{ headerShown: false, }} />
+                      <Stack.Screen name="InserirP" component={InserirP}
                     options={{ headerShown: false, }} />
             </Stack.Navigator>
         </NavigationContainer>

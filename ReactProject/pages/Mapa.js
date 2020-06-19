@@ -18,20 +18,20 @@ function Mapa({ route, navigation }) {
     function getPontos() {
         return axios.get('http://192.168.1.67:5000/ponto/getPontos')
             .then(function (response) {
-                setPonto( response.data)
+                setPonto(response.data)
                 ponto.map(ponto => {
                     console.log(ponto);
                 })
             }.bind(this))
             .catch((error) => {
                 console.log(error);
-            },[]);
+            }, []);
     }
 
     useEffect(() => {
         getPontos();
 
-    },[]);
+    }, []);
     const [initialPosition, setInitialPosition] = useState(
         {
             latitude: 41.693447,
@@ -80,11 +80,17 @@ function Mapa({ route, navigation }) {
         </View>*/
         <View style={styles.container}>
             <MapView
+                showsUserLocation
+                zoomControlEnabled
+                showsScale
+                showsPointsOfInterest={false}
+                showsMyLocationButton
+
                 provider={PROVIDER_GOOGLE} // remove if not using Google Maps
                 style={styles.map}
                 region={initialPosition}
             >
-                {ponto && ponto.map(marker => 
+                {ponto && ponto.map(marker =>
                     <Marker
                         key={marker.IdPonto}
                         coordinate={{
@@ -107,6 +113,9 @@ function Mapa({ route, navigation }) {
                 )
                 }
                 <Marker
+                    onPress={() => navigation.navigate('InserirP', {
+                        parametro
+                    })}
                     coordinate={markerPosition}>
                 </Marker>
 
