@@ -1,4 +1,4 @@
-import React, { useEffect, useState, componentDidMount } from 'react';
+import React, { useEffect, useState, componentDidMount, useNativeDriver } from 'react';
 import { View, Map, Text, Button, StyleSheet, Image, Alert, TouchableOpacity, actionButtuon, } from 'react-native';
 import { StackAActions, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -82,12 +82,12 @@ function Mapa({ route, navigation }) {
         </View>*/
         <View style={styles.container}>
 
-    
+
             <MapView
                 showsUserLocation
                 zoomControlEnabled
                 showsScale
-                showsPointsOfInterest={false}
+                showsPointsOfInterest={true}
                 showsMyLocationButton
 
                 provider={PROVIDER_GOOGLE} // remove if not using Google Maps
@@ -124,17 +124,17 @@ function Mapa({ route, navigation }) {
                     coordinate={markerPosition}>
                 </Marker>
             </MapView>
-                {/* Rest of the app comes ABOVE the action button component !*/}
-                <ActionButton buttonColor="rgba(231,76,60,1)" position='center'>
-                    <ActionButton.Item buttonColor='#9b59b6' title="Close" onPress={() => navigation.navigate('Login')}>
-                        <Icon name="md-close" style={styles.actionButtonIcon} />
-                    </ActionButton.Item>
-                    <ActionButton.Item buttonColor='#3498db' title="List" onPress={() => navigation.navigate('ListaP', { parametro})}>
-                        <Icon name="md-list" style={styles.actionButtonIcon} />
-                    </ActionButton.Item>
-                   
-                </ActionButton>
-            
+            {/* Rest of the app comes ABOVE the action button component !*/}
+            <ActionButton buttonColor="rgba(231,76,60,1)" position='center'>
+                <ActionButton.Item buttonColor='#9b59b6' title="Close" onPress={() => navigation.navigate('Login')}>
+                    <Icon name="md-close" style={styles.actionButtonIcon} />
+                </ActionButton.Item>
+                <ActionButton.Item buttonColor='#3498db' title="List" onPress={() => navigation.navigate('ListagemP', {parametro})}>
+                    <Icon name="md-list" style={styles.actionButtonIcon} />
+                </ActionButton.Item>
+
+            </ActionButton>
+
         </View>
 
     );

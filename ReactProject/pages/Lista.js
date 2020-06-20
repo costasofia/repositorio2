@@ -18,9 +18,9 @@ function Lista({ navigation }) {
     <Stack.Navigator initialRouteName="Listagem">
       <Stack.Screen name="Listagem" component={Listagem}
         options={({ navigation }) => ({
-          title:translations.ListaN,
+          title: translations.ListaN,
           backgroundColor: "#f1f1da",
-        //  headerLeft: null,
+          //  headerLeft: null,
           headerStyle: {
             backgroundColor: '#ffbf00',
           },
@@ -31,23 +31,23 @@ function Lista({ navigation }) {
           },
           headerRight: () => (
             <TouchableOpacity
-            //  style={styles.button}
+              //  style={styles.button}
               onPress={() => navigation.navigate('Inserir')}>
-              <Image style ={{width: 25, height:25,  marginRight: 10}} source={require('../imagens/edit.png')}/>   
+              <Image style={{ width: 25, height: 25, marginRight: 10 }} source={require('../imagens/edit.png')} />
             </TouchableOpacity>
           ),
           headerLeft: () => (
             <TouchableOpacity
-            //  style={styles.button}
+              //  style={styles.button}
               onPress={() => navigation.navigate('Login')}>
-              <Image style ={{width: 25, height:20,  marginLeft:12}} source={require('../imagens/saida.png')}/>   
+              <Image style={{ width: 25, height: 20, marginLeft: 12 }} source={require('../imagens/saida.png')} />
             </TouchableOpacity>
           ),
         })}
       />
       <Stack.Screen name="Detalhes" component={Detalhes}
         options={({ navigation }) => ({
-          title:translations.DetalhesN,
+          title: translations.DetalhesN,
           headerStyle: {
             backgroundColor: '#ffbf00',
           },
@@ -61,7 +61,7 @@ function Lista({ navigation }) {
       />
       <Stack.Screen name="Inserir" component={Inserir}
         options={({ navigation }) => ({
-          title:translations.InserirNota,
+          title: translations.InserirNota,
           headerStyle: {
             backgroundColor: '#ffbf00',
           },
@@ -74,7 +74,7 @@ function Lista({ navigation }) {
       />
       <Stack.Screen name="Atualizar" component={Atualizar}
         options={({ navigation }) => ({
-          title:translations.AtualizarN,
+          title: translations.AtualizarN,
           headerStyle: {
             backgroundColor: '#ffbf00',
           },
@@ -83,12 +83,12 @@ function Lista({ navigation }) {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-          
+
         })}
       />
-       <Stack.Screen name="Eliminar" component={Eliminar}
+      <Stack.Screen name="Eliminar" component={Eliminar}
         options={({ navigation }) => ({
-          title:translations.EliminarN,
+          title: translations.EliminarN,
           headerStyle: {
             backgroundColor: '#ffbf00',
           },
@@ -97,7 +97,7 @@ function Lista({ navigation }) {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-          
+
         })}
       />
 
