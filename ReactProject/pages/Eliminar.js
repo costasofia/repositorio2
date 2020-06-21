@@ -36,8 +36,8 @@ function Eliminar({ route, navigation }) {
       return (
         <View style={styles.MainContainer}>
           <View style={styles.MainContainer}>
-              <Text style = { styles.TextInputStyle }>{translations.Assunto}{assunto}</Text>
-              <Text style = { styles.TextInputStyle }>{translations.Descricao}{descricao}</Text>
+              <Text style = { styles.TextInputStyle }>{translations.Assunto}: {assunto}</Text>
+              <Text style = { styles.TextInputStyle }>{translations.Descricao}: {descricao}</Text>
           </View>
                <TouchableOpacity onPress={deleteData} style={styles.button2} >
                   <Text>{translations.EliminarN}</Text>

@@ -2,21 +2,23 @@ import React, { useContext } from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LocalizationContext } from './../services/localization/LocalizationContext';
-import Listagem from './Listagem';
-import Inserir from './Inserir';
-import Atualizar from './Atualizar';
-import Detalhes from './Detalhes';
-import Eliminar from './Eliminar';
+import { LocalizationContext } from '../services/localization/LocalizationContext';
+import Listagem from './../pages/Listagem';
+import Inserir from './../pages/Inserir';
+import Atualizar from './../pages/Atualizar';
+import Detalhes from './../pages/Detalhes';
+import Eliminar from './../pages/Eliminar';
 
 const Stack = createStackNavigator();
 
-function Lista({ navigation }) {
+function StackLista({ navigation }) {
 
   const { translations } = useContext(LocalizationContext);
   return (
     <Stack.Navigator initialRouteName="Listagem">
-      <Stack.Screen name="Listagem" component={Listagem}
+      <Stack.Screen
+        name="Listagem"
+        component={Listagem}
         options={({ navigation }) => ({
           title: translations.ListaN,
           backgroundColor: "#f1f1da",
@@ -33,14 +35,14 @@ function Lista({ navigation }) {
             <TouchableOpacity
               //  style={styles.button}
               onPress={() => navigation.navigate('Inserir')}>
-              <Image style={{ width: 25, height: 25, marginRight: 10 }} source={require('../imagens/edit.png')} />
+              <Image style={{ width: 25, height: 25, marginRight: 20 }} source={require('../imagens/edit.png')} />
             </TouchableOpacity>
           ),
           headerLeft: () => (
             <TouchableOpacity
               //  style={styles.button}
               onPress={() => navigation.navigate('Login')}>
-              <Image style={{ width: 25, height: 20, marginLeft: 12 }} source={require('../imagens/saida.png')} />
+              <Image style={{ width: 30, height: 30, marginLeft: 20 }} source={require('../imagens/exit.png')} />
             </TouchableOpacity>
           ),
         })}
@@ -105,4 +107,4 @@ function Lista({ navigation }) {
 
   );
 }
-export default Lista;
+export default StackLista;

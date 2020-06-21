@@ -112,7 +112,7 @@ function Login({ navigation }) {
                         <Text style={styles.textStyle}>{translations.BotaoLogin}</Text>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress={() => navigation.navigate('Lista')} style={styles.button}>
+                <TouchableOpacity onPress={() => navigation.navigate('StackLista')} style={styles.button}>
                     <Text style={styles.textStyle}>{translations.BotaoNotas}</Text>
                 </TouchableOpacity>
             </View>

@@ -1,7 +1,8 @@
 import React, { Component, useState, useEffect } from 'react';
 import { StyleSheet, Platform, View, Button, TouchableWithoutFeedback, Image, Text, TextInput, TouchableOpacity, Alert, YellowBox, FlatList, ActivityIndicator } from 'react-native';
 import axios from "axios";
-
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 let images = 'http://192.168.1.67:5000/'
 
 function ListagemP({ route, navigation }) {
@@ -9,7 +10,7 @@ function ListagemP({ route, navigation }) {
     const [ponto, setPonto] = useState([]);
     const [error, setError] = useState();
     const [isLoading, setLoading] = useState(true);
-    let imagens = 'http://192.168.1.67:5000/'
+
     function getPontos() {
         return axios.get('http://192.168.1.67:5000/ponto/pontos/' + parametro)
             .then(function (response) {
@@ -30,6 +31,10 @@ function ListagemP({ route, navigation }) {
 
     }, []);
 
+
+    function actionOnRow(item, navigation) {
+        navigation.navigate('DetalhesP', item);
+    }
     return (
         <View style={styles.MainContainer}>
             {isLoading ? <ActivityIndicator /> : (
@@ -37,16 +42,8 @@ function ListagemP({ route, navigation }) {
                     data={ponto}
                     keyExtractor={({ IdPonto }, index) => IdPonto}
                     renderItem={({ item }) => (
-
-                        <View style={styles.line}>
-                            <View style={{
-                                flex: 1,
-                                flexDirection: 'row',
-                                //backgroundColor: this.props.index % 2 == 0 ? 'mediumseagreen' : 'tomato'
-                                backgroundColor: 'lightblue'
-                            }}>
-                                <Image style={{ width: 90, height: 90, margin: 7 }} source={{ uri: imagens + item.Imagem}} ></Image> 
-
+                        <TouchableWithoutFeedback onPress={() => actionOnRow(item, navigation)}>
+                            <View style={styles.line}>
                                 <View style={{ flex: 1, flexDirection: 'column' }}>
                                     <Text style={styles.textcity}>{item.Tema}</Text>
                                     <Text style={styles.textcity}>{item.Descricao}</Text>
@@ -54,11 +51,20 @@ function ListagemP({ route, navigation }) {
                                     <Text style={styles.textcity}>{item.Latitude}</Text>
                                 </View>
                             </View>
-                        </View>
-
+                        </TouchableWithoutFeedback>
                     )}
+
                 />
             )}
+            <ActionButton buttonColor="rgba(231,76,60,1)" position='right'>
+                <ActionButton.Item buttonColor='#9b59b6' title="Close" onPress={() => navigation.navigate('Login')}>
+                    <Icon name="md-close" style={styles.actionButtonIcon} />
+                </ActionButton.Item>
+                <ActionButton.Item buttonColor='#3498db' title="Back" onPress={() => navigation.navigate('Mapa')}>
+                    <Icon name="md-arrow-back" style={styles.actionButtonIcon} />
+                </ActionButton.Item>
+
+            </ActionButton>
         </View>
 
     );
@@ -86,11 +92,19 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     line: {
-
+        backgroundColor: '#d3d3d3',
         margin: 5,
         flex: 2,
         padding: 10,
         flexDirection: 'row',
+    },
+    actionButtonIcon: {
+        fontSize: 16,
+        height: 16,
+        color: 'white',
+    },
+    botao: {
+        paddingLeft: 7,
     }
 });
 export default ListagemP;
