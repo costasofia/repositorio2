@@ -16,12 +16,12 @@ function DetalhesP({ route, navigation }) {
       .then(function (response) {
         setPonto(response.data),
           setLoading(false)
-        ponto.map(ponto => {s
-          console.log(ponto);s
+        ponto.map(ponto => {
+          console.log(ponto);
         })
       }.bind(this))
       .catch((error) => {
-        console.log(error);s
+        console.log(error);
       }, []);
   }
 
@@ -33,7 +33,7 @@ function DetalhesP({ route, navigation }) {
  
 
   function updateData() {
-    navigation.navigate('Atualizar', {
+    navigation.navigate('AtualizarP', {
       IdPonto: IdPonto,
       Tema: Tema,
       Descricao: Descricao,

@@ -129,8 +129,8 @@ android {
     }
 
     defaultConfig {
- 
-	]
+
+        
         applicationId "com.reactproject"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
