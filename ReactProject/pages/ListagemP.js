@@ -1,13 +1,15 @@
 import React, { Component, useState, useEffect } from 'react';
-import { StyleSheet, Platform, View, Button, TouchableWithoutFeedback, Image, Text, TextInput, TouchableOpacity, Alert, YellowBox, FlatList, ActivityIndicator } from 'react-native';
+import {Animated, StyleSheet, Platform, View, Button, TouchableWithoutFeedback, Image, Text, TextInput, TouchableOpacity, Alert, YellowBox, FlatList, ActivityIndicator } from 'react-native';
 import axios from "axios";
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 let images = 'http://192.168.1.67:5000/'
 
 function ListagemP({ route, navigation }) {
     const parametro = route.params.parametro;
     const [ponto, setPonto] = useState([]);
+    const { IdPonto,IdUtilizador, Tema, Descricao, Latitude, Longitude } = route.params;
     const [error, setError] = useState();
     const [isLoading, setLoading] = useState(true);
 
@@ -20,7 +22,7 @@ function ListagemP({ route, navigation }) {
                     console.log(ponto);
                 })
             }.bind(this))
-            .catch((error) => {
+            .catch((error) => {s
                 console.log(error);
             }, []);
     }
@@ -30,7 +32,6 @@ function ListagemP({ route, navigation }) {
 
 
     }, []);
-
 
     function actionOnRow(item, navigation) {
         navigation.navigate('DetalhesP', item);
@@ -42,6 +43,7 @@ function ListagemP({ route, navigation }) {
                     data={ponto}
                     keyExtractor={({ IdPonto }, index) => IdPonto}
                     renderItem={({ item }) => (
+                       
                         <TouchableWithoutFeedback onPress={() => actionOnRow(item, navigation)}>
                             <View style={styles.line}>
                                 <View style={{ flex: 1, flexDirection: 'column' }}>
@@ -52,6 +54,7 @@ function ListagemP({ route, navigation }) {
                                 </View>
                             </View>
                         </TouchableWithoutFeedback>
+                  
                     )}
 
                 />
@@ -60,7 +63,7 @@ function ListagemP({ route, navigation }) {
                 <ActionButton.Item buttonColor='#9b59b6' title="Close" onPress={() => navigation.navigate('Login')}>
                     <Icon name="md-close" style={styles.actionButtonIcon} />
                 </ActionButton.Item>
-                <ActionButton.Item buttonColor='#3498db' title="Back" onPress={() => navigation.navigate('Mapa')}>
+                <ActionButton.Item buttonColor='#3498db' title="Back" onPress={() => navigation.push('Mapa',{parametro: parametro})}>
                     <Icon name="md-arrow-back" style={styles.actionButtonIcon} />
                 </ActionButton.Item>
 

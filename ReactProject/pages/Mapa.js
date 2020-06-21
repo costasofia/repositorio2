@@ -104,7 +104,7 @@ function Mapa({ route, navigation }) {
                         <Callout>
                             <View style={styles.callout}>
                                 <Image style={styles.image}
-                                    source={{ uri: images + marker.Imagem }} />
+                                    source={{ uri: marker.Imagem }} />
                                 <View style={styles.callout2}>
                                     <Text>
                                         Assunto:{marker.Tema}
@@ -129,7 +129,7 @@ function Mapa({ route, navigation }) {
                 <ActionButton.Item buttonColor='#9b59b6' title="Close" onPress={() => navigation.navigate('Login')}>
                     <Icon name="md-close" style={styles.actionButtonIcon} />
                 </ActionButton.Item>
-                <ActionButton.Item buttonColor='#3498db' title="List" onPress={() => navigation.navigate('ListagemP', {parametro})}>
+                <ActionButton.Item buttonColor='#3498db' title="List" onPress={() => navigation.push('ListagemP', {parametro})}>
                     <Icon name="md-list" style={styles.actionButtonIcon} />
                 </ActionButton.Item>
 

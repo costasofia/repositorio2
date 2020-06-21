@@ -79,6 +79,8 @@ target 'ReactProject' do
 
   pod 'RealmJS', :path => '../node_modules/realm'
 
+  pod 'pushbots-react-native', :path => '../node_modules/pushbots-react-native'
+
   target 'ReactProjectTests' do
     inherit! :complete
     # Pods for testing

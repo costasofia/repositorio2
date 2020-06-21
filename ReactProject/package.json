@@ -18,6 +18,7 @@
     "@react-navigation/stack": "^5.5.1",
     "axios": "^0.19.2",
     "jwt-decode": "^2.2.0",
+    "pushbots-react-native": "^1.2.1",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-action-button": "^2.8.5",

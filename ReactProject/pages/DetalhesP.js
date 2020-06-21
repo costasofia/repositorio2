@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useFocusEffect } from 'react';
 import { StyleSheet, Platform, View, Button, Image, Text, TextInput, TouchableOpacity, Alert, YellowBox, ListView } from 'react-native';
 import axios from "axios";
 import { NavigationContainer } from '@react-navigation/native';
@@ -6,29 +6,31 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { LocalizationContext } from './../services/localization/LocalizationContext';
 function DetalhesP({ route, navigation }) {
   const parametro = route.params.parametro;
-  const { IdPonto, Tema, Descricao, Latitude, Longitude } = route.params;
+  const { IdPonto,IdUtilizador, Tema, Descricao, Latitude, Longitude } = route.params;
   const [ponto, setPonto] = useState([]);
   const { translations } = useContext(LocalizationContext);
+  const [isLoading, setLoading] = useState(true);
 
   function deletePontos() {
     return axios.delete('http://192.168.1.67:5000/ponto/apagarPonto/' + IdPonto)
       .then(function (response) {
         setPonto(response.data),
           setLoading(false)
-        ponto.map(ponto => {
-          console.log(ponto);
+        ponto.map(ponto => {s
+          console.log(ponto);s
         })
       }.bind(this))
       .catch((error) => {
-        console.log(error);
+        console.log(error);s
       }, []);
   }
 
   useEffect(() => {
+
     deletePontos();
 
   }, []);
-
+ 
 
   function updateData() {
     navigation.navigate('Atualizar', {
@@ -50,7 +52,7 @@ function DetalhesP({ route, navigation }) {
         },
         {
           text: translations.Sim,
-          onPress: () => { deletePontos(navigation.replace('ListagemP', {IdPonto})); }
+          onPress: () => { deletePontos(navigation.navigate('Mapa', {parametro: parametro})); }
         },
       ]
     );
